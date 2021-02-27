@@ -71,10 +71,10 @@ if(!empty($_GET['id']) && (is_numeric(($_GET['id']))))
             <label for="Season"> Season </label>
             <article>
                 <select name="Season" id="Season" class="form-control" required> 
-                    <option value="<?php $season ?>"> 
+                    <option value="" disabled selected hidden> 
                         <?php 
-                        if(is_null($season)) {echo 'Season';} 
-                        else { echo $season;}
+                        if(is_null($season)) {echo 'Choose a season';} 
+                        else { echo 'Previous choice: ',$season;}
                         ?> 
                     </option>
                     <option value="Summer"> Summer </option>
@@ -88,10 +88,10 @@ if(!empty($_GET['id']) && (is_numeric(($_GET['id']))))
             <label for="Type"> Type </label>    
             <article>
                 <select name="Type" id="Type" class="form-control" required>
-                    <option value="<?php $type ?>"> 
+                    <option value="" disabled selected hidden> 
                         <?php 
-                        if(is_null($type)) {echo 'Type';} 
-                        else { echo $type;}
+                        if(is_null($type)) {echo 'Choose a type';} 
+                        else { echo 'Previous choice: ',$type;}
                         ?> 
                     </option>
                     <option value="Outerwear"> Outerwear </option>
@@ -111,10 +111,10 @@ if(!empty($_GET['id']) && (is_numeric(($_GET['id']))))
             <label for="Occasion"> Occasion </label>  
             <article>
                 <select name="Occasion" id="Occasion" class="form-control" required>
-                    <option value="<?php $occasion ?>"> 
+                    <option value="" disabled selected hidden> 
                         <?php 
-                        if(is_null($occasion)) {echo 'Occasion';} 
-                        else { echo $occasion;}
+                        if(is_null($occasion)) {echo 'Choose an occasion';} 
+                        else { echo 'Previous choice: ',$occasion;}
                         ?> 
                     </option>
                     <option value="Casual"> Casual </option>
@@ -128,7 +128,7 @@ if(!empty($_GET['id']) && (is_numeric(($_GET['id']))))
         </div>
         <div class="form-group">
             <label for="Worn"> Times Worn </label> 
-            <input type="number" name="Worn" id="Worn" class="form-control" value="<?php echo $worn ?>" > 
+            <input type="number" name="Worn" id="Worn" class="form-control" value="<?php echo $worn ?>" required > 
         </div> 
         <div class="form-group">
             <label for="Comments"> Comments </label>    
