@@ -1,0 +1,119 @@
+/*Erase page margins*/
+body
+{
+  margin: 0px 100px 0px 100px !important;
+  background-color: #ff959b;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+  font-family: 'Montserrat', sans-serif;
+}
+p, a
+{
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  color: #000000;
+}
+/* Style Header*/
+#navLogo
+{
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-auto-rows: auto;
+  column-gap: 0;
+  align-items: center;
+  height: 110px;
+}
+#navLogo>article
+{
+  height: 90px;
+}
+#navLogo>article>img
+{
+  width: auto;
+  height: 100%;
+}
+#navLogo>nav>ul
+{
+  list-style: none;
+  display: flex;
+}
+#navLogo>nav>ul>li
+{
+  padding: 0px 15px;
+}
+#navLogo>nav>ul>li>a
+{
+  text-decoration: none;
+  color: #000000;
+}
+/*dropdown navigation*/
+.dropdown-button
+{
+  padding: 7px;
+}
+.drop-button:hover
+{
+  background-color: #ff959b;
+}
+.dropdown
+{
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content
+{
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  overflow: auto;
+  z-index: 1;
+  list-style: none;
+  padding-left: 0px;
+}
+.dropdown-content a
+{
+  color: #000000;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover
+{
+  background-color: #ff959b;
+}
+.show
+{
+  display: block;
+}
+/*Style masthead*/
+header>section:nth-child(1)
+{
+  background-image: url("../img/masthead.jpg");
+  height:70vh; 
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0% 1% 0% 0%;
+  display: flex;
+  align-items: center;
+  
+
+}
+header>section:nth-child(1)> div
+{
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5%;
+  width: 50%;
+  padding: 2%;
+}
+header>section:nth-child(1)>h1
+{
+  font-size: 45px;
+  font-weight: 600;
+}
+header>section:nth-child(1)>h2
+{
+  font-size: 34px;
+  font-weight: 400;
+}

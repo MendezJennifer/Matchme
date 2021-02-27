@@ -4,14 +4,13 @@
 try
 {
     //Data source name
-    $dsn = 'mysql:host=localhost;
-    dbname=Matchme';
-    $username = 'root';
-    $password = '';
+    $dsn = 'mysql:host=172.31.22.43;
+    dbname=Jennifer200454895';
+    $username = 'Jennifer200454895';
+    $password = 'wPMVb897yq';
 
     //Create instance of PDO object
     $db = new PDO($dsn,$username,$password);
-    echo 'Connected sucesfully!';
 }
 
 catch(PDOException $e)

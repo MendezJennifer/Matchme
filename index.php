@@ -1,36 +1,99 @@
-<!DOCTYPE html>
-<html lang="en-CA">
-<head>
-    <!--add charset -->
-    <meta charset="utf-8">
-    <!-- meta viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Matchme </title>
-    <!-- Course Project: Jennifer Mendez-->
-    <meta name="description" content= "Course Project - Phase One">
-    <!-- add robots -->
-    <meta name="robots" content="noindex, nofollow">
-</head>
-<body>
+<?php require('header.php'); 
+
+//Initialize variables (used if user is editing)
+$id=null;
+$item = null;
+$season = null;
+$type = null;
+$color = null;
+$occasion = null;
+$worn = null;
+$comments = null;
+$email = null;
+
+if(!empty($_GET['id']) && (is_numeric(($_GET['id'])))) 
+{
+    //Store id from the url
+    $id = filter_input(INPUT_GET, 'id'); 
+    
+    //Connect to database
+    require('connect.php'); 
+    
+    //Set SQL query  
+    $sql = "SELECT * FROM closet WHERE item_id = :item_id;";
+    
+    //Call the prepare method of the PDO object 
+    $statement = $db->prepare($sql);
+    
+    //Bind parameters 
+    $statement->bindParam(':item_id', $id);  
+    
+    //Execute query
+    $statement->execute(); 
+
+    //Store results
+    $records = $statement->fetchAll(); 
+
+    foreach($records as $record) :
+        //$id=$record['id'];
+        $item = $record['Item'];
+        $season = $record['Season'];
+        $type = $record['Type'];
+        $color = $record['Color'];
+        $occasion = $record['Occasion'];
+        $worn = $record['Times_Worn'];
+        $comments = $record['Comments'];
+        $email = $record['Email'];
+    endforeach;   
+    
+    //Close database connection
+    $statement->closeCursor(); 
+}
+
+?>
+
     <header>
-        <h1> Matchme</h1>
-        <h2> Welcome to your virtual closet! </h2>
+        <section>
+            <div>
+                <h1> Matchme</h1>
+                <h2> Welcome to your virtual closet! </h2>
+            </div>    
+        </section>
     </header>
     <main>
     <form action="process.php" method="post">
-            <input type="text" name="Item" id="Item" placeholder="Item">
+        <input type="hidden" name="item_id" value="<?php echo $id ?>">
+        <div class="form-group">
+            <label for="Item"> Item </label>
+            <input type="text" name="Item" id="Item" class="form-control" value="<?php echo $item ?>" required >
+        </div>
+        <div class="form-group">
+            <label for="Season"> Season </label>
             <article>
-                <select name="Season" id="Season"> 
-                    <option value="Season"> Season </option>
+                <select name="Season" id="Season" class="form-control" required> 
+                    <option value="<?php $season ?>"> 
+                        <?php 
+                        if(is_null($season)) {echo 'Season';} 
+                        else { echo $season;}
+                        ?> 
+                    </option>
                     <option value="Summer"> Summer </option>
                     <option value="Fall"> Fall </option>
                     <option value="Winter"> Winter </option>
                     <option value="Spring"> Spring </option>
                 </select>
             </article>
+        </div>
+        <div class="form-group">
+            <label for="Type"> Type </label>    
             <article>
-                <select name="Type" id="Type">
-                    <option value="Type"> Type </option>
+                <select name="Type" id="Type" class="form-control" required>
+                    <option value="<?php $type ?>"> 
+                        <?php 
+                        if(is_null($type)) {echo 'Type';} 
+                        else { echo $type;}
+                        ?> 
+                    </option>
                     <option value="Outerwear"> Outerwear </option>
                     <option value="Top"> Top </option>
                     <option value="Bottom"> Bottom </option>
@@ -39,10 +102,21 @@
                     <option value="Accessories"> Accessories </option>
                 </select>
             </article>
-            <input type="text" name="Color" id="Color" placeholder="Color"> 
+        </div>
+        <div class="form-group">
+            <label for="Color"> Color </label>  
+            <input type="text" name="Color" id="Color" class="form-control" value="<?php echo $color ?>" > 
+        </div>
+        <div class="form-group">
+            <label for="Occasion"> Occasion </label>  
             <article>
-                <select name="Occasion" id="Occasion">
-                    <option value="Occasion"> Occasion </option>
+                <select name="Occasion" id="Occasion" class="form-control" required>
+                    <option value="<?php $occasion ?>"> 
+                        <?php 
+                        if(is_null($occasion)) {echo 'Occasion';} 
+                        else { echo $occasion;}
+                        ?> 
+                    </option>
                     <option value="Casual"> Casual </option>
                     <option value="Dressy_Casual "> Dressy Casual </option>
                     <option value="Business"> Business </option>
@@ -51,14 +125,20 @@
                     <option value="Formal"> Formal </option>
                 </select>
             </article>
-            <input type="number" name="Worn" id="Worn" placeholder="Times Worn"> 
-            <input type="text" name="Comments" id="Comments" placeholder="Comments">
-            <input type="email" name="email" id="email" placeholder="Email">
-            <input type="submit" value="submit" name="submit">
+        </div>
+        <div class="form-group">
+            <label for="Worn"> Times Worn </label> 
+            <input type="number" name="Worn" id="Worn" class="form-control" value="<?php echo $worn ?>" > 
+        </div> 
+        <div class="form-group">
+            <label for="Comments"> Comments </label>    
+            <input type="text" name="Comments" id="Comments" class="form-control" value="<?php echo $comments ?>" >
+        </div>  
+        <div class="form-group">
+            <label for="Email"> Email </label>  
+            <input type="email" name="Email" id="Email" class="form-control" value="<?php echo $email ?>" >
+        </div>
+            <input type="submit" value="submit" name="submit" class="btn btn-primary">
         </form>
     </main>
-    <footer>
-        <p> &copy; <?php echo getdate()['year']; ?> </p>
-    </footer>
-</body>
-</html>
+    <?php  require('footer.php'); ?>
