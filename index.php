@@ -1,66 +1,67 @@
-<?php require('header.php'); 
+<?php 
+    require('header.php'); 
 
-//Initialize variables (used if user is editing)
-$id=null;
-$item = null;
-$season = null;
-$type = null;
-$color = null;
-$occasion = null;
-$worn = null;
-$comments = null;
-$email = null;
+    //Initialize variables (used if user is editing)
+    $id=null;
+    $item = null;
+    $season = null;
+    $type = null;
+    $color = null;
+    $occasion = null;
+    $worn = null;
+    $comments = null;
+    $email = null;
 
-if(!empty($_GET['id']) && (is_numeric(($_GET['id'])))) 
-{
-    //Store id from the url
-    $id = filter_input(INPUT_GET, 'id'); 
-    
-    //Connect to database
-    require('connect.php'); 
-    
-    //Set SQL query  
-    $sql = "SELECT * FROM closet WHERE item_id = :item_id;";
-    
-    //Call the prepare method of the PDO object 
-    $statement = $db->prepare($sql);
-    
-    //Bind parameters 
-    $statement->bindParam(':item_id', $id);  
-    
-    //Execute query
-    $statement->execute(); 
+    if(!empty($_GET['id']) && (is_numeric(($_GET['id'])))) 
+    {
+        //Store id from the url
+        $id = filter_input(INPUT_GET, 'id'); 
+        
+        //Connect to database
+        require('connect.php'); 
+        
+        //Set SQL query  
+        $sql = "SELECT * FROM closet WHERE item_id = :item_id;";
+        
+        //Call the prepare method of the PDO object 
+        $statement = $db->prepare($sql);
+        
+        //Bind parameters 
+        $statement->bindParam(':item_id', $id);  
+        
+        //Execute query
+        $statement->execute(); 
 
-    //Store results
-    $records = $statement->fetchAll(); 
+        //Store results
+        $records = $statement->fetchAll(); 
 
-    foreach($records as $record) :
-        //$id=$record['id'];
-        $item = $record['Item'];
-        $season = $record['Season'];
-        $type = $record['Type'];
-        $color = $record['Color'];
-        $occasion = $record['Occasion'];
-        $worn = $record['Times_Worn'];
-        $comments = $record['Comments'];
-        $email = $record['Email'];
-    endforeach;   
-    
-    //Close database connection
-    $statement->closeCursor(); 
-}
+        foreach($records as $record) :
+            //$id=$record['id'];
+            $item = $record['Item'];
+            $season = $record['Season'];
+            $type = $record['Type'];
+            $color = $record['Color'];
+            $occasion = $record['Occasion'];
+            $worn = $record['Times_Worn'];
+            $comments = $record['Comments'];
+            $email = $record['Email'];
+        endforeach;   
+        
+        //Close database connection
+        $statement->closeCursor(); 
+    }
 
 ?>
 
-    <header>
-        <section>
-            <div>
-                <h1> Matchme</h1>
-                <h2> Welcome to your virtual closet! </h2>
-            </div>    
-        </section>
-    </header>
-    <main>
+<header>
+    <section>
+        <div>
+            <h1> Matchme</h1>
+            <h2> Welcome to your virtual closet! </h2>
+        </div>    
+    </section>
+</header>
+<main>
     <form action="process.php" method="post">
         <input type="hidden" name="item_id" value="<?php echo $id ?>">
         <div class="form-group">
@@ -73,8 +74,8 @@ if(!empty($_GET['id']) && (is_numeric(($_GET['id']))))
                 <select name="Season" id="Season" class="form-control" required> 
                     <option value="" disabled selected hidden> 
                         <?php 
-                        if(is_null($season)) {echo 'Choose a season';} 
-                        else { echo 'Previous choice: ',$season;}
+                            if(is_null($season)) {echo 'Choose a season';} 
+                            else { echo 'Previous choice: ',$season;}
                         ?> 
                     </option>
                     <option value="Summer"> Summer </option>
@@ -90,8 +91,8 @@ if(!empty($_GET['id']) && (is_numeric(($_GET['id']))))
                 <select name="Type" id="Type" class="form-control" required>
                     <option value="" disabled selected hidden> 
                         <?php 
-                        if(is_null($type)) {echo 'Choose a type';} 
-                        else { echo 'Previous choice: ',$type;}
+                            if(is_null($type)) {echo 'Choose a type';} 
+                            else { echo 'Previous choice: ',$type;}
                         ?> 
                     </option>
                     <option value="Outerwear"> Outerwear </option>
@@ -113,8 +114,8 @@ if(!empty($_GET['id']) && (is_numeric(($_GET['id']))))
                 <select name="Occasion" id="Occasion" class="form-control" required>
                     <option value="" disabled selected hidden> 
                         <?php 
-                        if(is_null($occasion)) {echo 'Choose an occasion';} 
-                        else { echo 'Previous choice: ',$occasion;}
+                            if(is_null($occasion)) {echo 'Choose an occasion';} 
+                            else { echo 'Previous choice: ',$occasion;}
                         ?> 
                     </option>
                     <option value="Casual"> Casual </option>
@@ -139,6 +140,6 @@ if(!empty($_GET['id']) && (is_numeric(($_GET['id']))))
             <input type="email" name="Email" id="Email" class="form-control" value="<?php echo $email ?>" >
         </div>
             <input type="submit" value="submit" name="submit" class="btn btn-primary">
-        </form>
-    </main>
-    <?php  require('footer.php'); ?>
+    </form>
+</main>
+<?php  require('footer.php'); ?>

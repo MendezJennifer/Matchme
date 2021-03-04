@@ -104,7 +104,7 @@
             }
         }
 
-        require('footer.php'); 
-        ob_flush(); 
+    require('footer.php'); 
+    ob_flush(); 
 
-        ?>
+?>

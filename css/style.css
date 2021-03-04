@@ -15,6 +15,7 @@ p, a
   font-size: 18px;
   color: #000000;
 }
+
 /* Style Header*/
 #navLogo
 {
@@ -48,6 +49,7 @@ p, a
   text-decoration: none;
   color: #000000;
 }
+
 /*dropdown navigation*/
 .dropdown-button
 {
@@ -88,6 +90,10 @@ p, a
   display: block;
 }
 /*Style masthead*/
+header
+{
+  margin-bottom: 50px;
+}
 header>section:nth-child(1)
 {
   background-image: url("../img/masthead.jpg");
@@ -98,7 +104,6 @@ header>section:nth-child(1)
   display: flex;
   align-items: center;
   
-
 }
 header>section:nth-child(1)> div
 {
@@ -116,4 +121,11 @@ header>section:nth-child(1)>h2
 {
   font-size: 34px;
   font-weight: 400;
+}
+
+/*Search Bar*/
+main>#search>h2
+{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

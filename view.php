@@ -8,6 +8,23 @@
         </div>    
     </section>
 </header>
+<main>
+    <div id="search">
+        <!--Search bar-->
+        <h2> Search Item </h2> 
+        <form action="search_results.php" method="get">
+            <div class="row">
+                <div class="col">
+                    <input type ="text" name="user" placeholder="Email" class="form-control">
+                </div>
+                <div class="col">
+                    <input type="text" name="search" placeholder="Item" class="form-control">
+                </div>
+                <input type="submit" name="submit" value="Search" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</main>  
 
 <?php
     //Connect to database  
@@ -25,7 +42,7 @@
     //Store results
     $records = $statement->fetchAll(); 
 
-    //Echo out top of table 
+    //Echo top of table 
     echo "<table class='table table-striped'><tbody>";
     echo "<thead><tr><th>Item</th><th>Season</th><th>Type</th><th>Color</th><th>Occasion</th><th>Times Worn</th><th>Comments</th><th>Email</th><th>Delete</th><th>Update</th></tr></thead>"; 
 
@@ -36,7 +53,8 @@
 
     echo "</tbody></table>"; 
 
-    //Close database  connection
+    //Close database connection
     $statement->closeCursor(); 
 
-    require('footer.php'); ?>
+    require('footer.php'); 
+?>
