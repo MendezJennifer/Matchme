@@ -64,7 +64,7 @@
           <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 
           <button class="btn btn-primary" type="submit">Register</button>
-          <button class="btn btn-primary" type="submit" href="login.php">Login</button>
+          <a class="btn btn-primary" href="index.php">Login</a>
         </form>
       </section>
 
