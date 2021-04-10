@@ -37,27 +37,27 @@
         <form action="insert.php" method="post" novalidate>
             <div class="form-group">
                 <label for="first_name">Username*</label>
-                <input class="form-control" type="text" name="username" required placeholder="Fashionista56" value="<?= $form_values['username'] ?? null ?>">
+                <input class="form-control" type="text" name="profileUsername" required placeholder="Fashionista56" value="<?= $form_values['profileUsername'] ?? null ?>" maxlength="30">
             </div>
 
             <div class="form-group">
                 <label for="email">Email*</label>
-                <input class="form-control" type="email" name="email" placeholder="example@gmail.com" required value="<?= $form_values['email'] ?? null ?>">
+                <input class="form-control" type="email" name="email" placeholder="example@gmail.com" required value="<?= $form_values['email'] ?? null ?>" maxlength="50">
             </div>
 
             <div class="form-group">
                 <label for="email_confirmation">Email Confirmation*</label>
-                <input class="form-control" type="email" name="email_confirmation" placeholder="example@gmail.com" required value="<?= $form_values['email_confirmation'] ?? null ?>">
+                <input class="form-control" type="email" name="email_confirmation" placeholder="example@gmail.com" required value="<?= $form_values['email_confirmation'] ?? null ?>" maxlength="50">
              </div>
 
             <div class="form-group">
                 <label for="password">Password*</label>
-                <input class="form-control" type="password" name="password" required>
+                <input class="form-control" type="password" name="profilePassword" required maxlength="255">
             </div>
 
             <div class="form-group">
                 <label for="password_confirmation">Password Confirmation*</label>
-                <input class="form-control" type="password" name="password_confirmation" required>
+                <input class="form-control" type="password" name="password_confirmation" required maxlength="255">
             </div>
 
           <!-- Add the recaptcha field -->

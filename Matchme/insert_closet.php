@@ -1,5 +1,15 @@
 <?php 
-    require('header.php'); 
+    require('header.php');
+    // If they're not logged in, redirect them
+    session_start();
+    if(!$_SESSION['user'])
+    {
+        $_SESSION['errors'][]="Please log in";
+        header("Location: index.php");
+        exit();
+    }
+    // Assign the user
+    $user=$_SESSION['user']; 
 
     //Initialize variables (used if user is editing)
     $id=null;
@@ -66,7 +76,7 @@
         <input type="hidden" name="item_id" value="<?php echo $id ?>">
         <div class="form-group">
             <label for="Item"> Item* </label>
-            <input type="text" name="Item" id="Item" class="form-control" placeholder="Dress" value="<?php echo $item; ?>" required >
+            <input type="text" name="Item" id="Item" class="form-control" placeholder="Dress" value="<?php echo $item; ?>" required maxlength="50">
         </div>
         <div class="form-group">
             <label for="Season"> Season* </label>
@@ -106,7 +116,7 @@
         </div>
         <div class="form-group">
             <label for="Color"> Color* </label>  
-            <input type="text" name="Color" id="Color" class="form-control" placeholder="Blue" value="<?php echo $color; ?>" required  > 
+            <input type="text" name="Color" id="Color" class="form-control" placeholder="Blue" value="<?php echo $color; ?>" required maxlength="50"> 
         </div>
         <div class="form-group">
             <label for="Occasion"> Occasion* </label>  
@@ -129,15 +139,15 @@
         </div>
         <div class="form-group">
             <label for="Worn"> Times Worn* </label> 
-            <input type="number" name="Worn" id="Worn" class="form-control" placeholder="1" value="<?php echo $worn; ?>" required > 
+            <input type="number" name="Worn" id="Worn" class="form-control" placeholder="1" value="<?php echo $worn; ?>" min="0" max="99999999999"required > 
         </div> 
         <div class="form-group">
             <label for="Comments"> Comments </label>    
-            <input type="text" name="Comments" id="Comments" class="form-control" placeholder="Comfortable" value="<?php echo $comments; ?>" >
+            <input type="text" name="Comments" id="Comments" class="form-control" placeholder="Comfortable" value="<?php echo $comments; ?>" maxlength="100" >
         </div>  
         <div class="form-group">
             <label for="Email"> Email </label>  
-            <input type="email" name="Email" id="Email" class="form-control" placeholder="example@gmail.com" value="<?php $email; ?>" >
+            <input type="email" name="Email" id="Email" class="form-control" placeholder="example@gmail.com" value="<?php $email; ?>" maxlength="30" >
         </div>
 
         <!-- Add the recaptcha field -->

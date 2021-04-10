@@ -1,6 +1,16 @@
 <?php 
     session_start();
-    require('header.php'); 
+    require('header.php');
+      // If they're not logged in, redirect them
+    session_start();
+    if(!$_SESSION['user'])
+    {
+    $_SESSION['errors'][]="Please log in";
+    header("Location: index.php");
+    exit();
+    }
+  // Assign the user
+  $user=$_SESSION['user']; 
 ?>
 
 <header>
@@ -21,10 +31,9 @@
     //Connect to database 
     require('connect.php');
 
-    $_SESSION['user']=$name;
 
     //Set SQL query
-    $query="SELECT * FROM closet WHERE Item LIKE :search_term;";
+    $query="SELECT * FROM closet WHERE Item LIKE :search_term AND Email='{$_SESSION['user']['email']}'";
 
     //Preprare
     $stmt=$db->prepare($query);
@@ -63,3 +72,7 @@
     require('footer.php');
     
 ?>
+
+<a class="btn btn-primary" href="profile.php"> Back to closet</a>
+  </body>
+</html>

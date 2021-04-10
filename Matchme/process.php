@@ -93,9 +93,9 @@
 
                 echo '<p> Success, your item has been added!  </p> ';
 
-                //Close database  connection and redirect to view page
+                //Close database  connection and redirect to profile page
                 $statement->closeCursor(); 
-                header('location:view.php');
+                header('location:profile.php');
             }
             
             catch(PDOException $e) 

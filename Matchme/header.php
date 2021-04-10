@@ -33,7 +33,7 @@
         <a href="#" onclick="dropFunction()" class="drop-button"> Menu </a>
         <ul id="dropMenu" class="dropdown-content">
             <li> <a href="insert_closet.php"> Add Clothes </a> </li>
-            <li> <a href="view.php"> My Closet </a> </li>
+            <li> <a href="profile.php"> My Closet </a> </li>
             <li> <a href="logout.php"> Log Out </a> </li>
         </ul>
         </li>

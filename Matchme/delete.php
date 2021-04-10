@@ -21,7 +21,7 @@ try
 
     //Close database connection
     $statement->closeCursor(); 
-    header('location:view.php'); 
+    header('location:profile.php'); 
 }
 catch(PDOException $e) 
 {

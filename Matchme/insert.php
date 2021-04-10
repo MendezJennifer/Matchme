@@ -35,18 +35,18 @@
   }
 
   // Collect our fields
-  $username = filter_input(INPUT_POST, 'username');
+  $profileUsername = filter_input(INPUT_POST, 'profileUsername');
   $email = filter_input(INPUT_POST, 'email',FILTER_VALIDATE_EMAIL);
   $email_confirmation = filter_input(INPUT_POST, 'email_confirmation');
-  $password = filter_input(INPUT_POST, 'password');
+  $profilePassword = filter_input(INPUT_POST, 'profilePassword');
   $password_confirmation = filter_input(INPUT_POST, 'password_confirmation');
 
   // Validate the necessary fields are not empty
   $required_fields = [
-    'username',
+    'profileUsername',
     'email',
     'email_confirmation',
-    'password',
+    'profilePassword',
     'password_confirmation'
   ];
 
@@ -56,6 +56,11 @@
     {
         $human_field=str_replace("_"," ",$field);
         $errors[]="You cannot leave the {$human_field} blank.";
+    }
+    else
+    {
+      if($field==="profilePassword" || $field==="password_confirmation") continue;
+      $$field = filter_var($$field, FILTER_SANITIZE_STRING);
     }
   }
 
@@ -72,7 +77,7 @@
   }
 
   // Validate the password matches the password_confirmation
-  if($password !== $password_confirmation)
+  if($profilePassword !== $password_confirmation)
   {
     $errors[]="The password doesn't match the password confirmation field.";
   }
@@ -88,20 +93,20 @@
   $email=strtolower($email);
 
   // Hash the password
-  $password=password_hash($password,PASSWORD_DEFAULT);
+  $profilePassword=password_hash($profilePassword,PASSWORD_DEFAULT);
 
   /* END NORMALIZATION */
 
   /* SANITIZATION */
   // Sanitize all values on their insertion
   require_once('connect.php');
-  $sql="INSERT INTO users (username,email,password) VALUES (:username, :email, :password);";
+  $sql="INSERT INTO users (username, email, password) VALUES (:profileUsername, :email, :profilePassword);";
   $stmt = $db->prepare($sql);
 
   // Sanitize using the binding
-  $stmt->bindParam(':username',$username,PDO::PARAM_STR);
+  $stmt->bindParam(':profileUsername',$profileUsername,PDO::PARAM_STR);
   $stmt->bindParam(':email',$email,PDO::PARAM_STR);
-  $stmt->bindParam(':password',$password,PDO::PARAM_STR);
+  $stmt->bindParam(':profilePassword',$profilePassword,PDO::PARAM_STR);
 
   /* END SANITIZATION */
 
@@ -110,7 +115,7 @@
   {
     $stmt->execute();
     $_SESSION['successes'][]="You have been registered sucessfully.";
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
   }
   catch(Exception $error)
@@ -118,6 +123,3 @@
     $errors[]=$error->getMessage();
     error_handler($errors);
   }
-  // Check for SQL errors
-
-  // If there are any errors, respond with them
