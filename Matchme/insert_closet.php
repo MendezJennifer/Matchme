@@ -54,7 +54,7 @@
             $occasion = $record['Occasion'];
             $worn = $record['Times_Worn'];
             $comments = $record['Comments'];
-            $email = $record['Email'];
+            //$email = $record['Email'];
         endforeach;   
         
         //Close database connection
@@ -146,8 +146,7 @@
             <input type="text" name="Comments" id="Comments" class="form-control" placeholder="Comfortable" value="<?php echo $comments; ?>" maxlength="100" >
         </div>  
         <div class="form-group">
-            <label for="Email"> Email </label>  
-            <input type="email" name="Email" id="Email" class="form-control" placeholder="example@gmail.com" value="<?php $email; ?>" maxlength="30" >
+            <input type="hidden" name="Email" id="Email" class="form-control" value="<?php echo $_SESSION['user']['email'] ?>" maxlength="30" >
         </div>
 
         <!-- Add the recaptcha field -->
