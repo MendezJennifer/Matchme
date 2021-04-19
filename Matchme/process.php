@@ -26,12 +26,6 @@
             echo "<p> Please use a positive numeric value for times worn </p>"; 
             $ok = false; 
         }
-
-        // if($email === false) 
-        // {
-        //     echo "<p> Please use a valid email address </p>";
-        //     $ok = false;  
-        // }
         
         if(strcmp($season, "") === 0 || is_null($season))
         {
